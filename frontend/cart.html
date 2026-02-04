@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bag - Ellen Luxe Hairs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/ELLEN LUXE LOGO.png" alt="Ellen Luxe Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="hair-type.html">Hair Type</a></li>
+                    <li><a href="sale.html" class="sale-link">Sale</a></li>
+                    <li><a href="policy.html">Policy</a></li>
+                    <li><a href="new.html">New</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <a href="cart.html" class="cart-anchor">
+                    <div class="cart-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                        <span class="cart-counter" id="cartCount">0</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="cart-page-main">
+        <div class="cart-wrapper">
+            <h1 class="cart-header-title">Your Shopping Bag</h1>
+            
+            <div class="cart-grid">
+                <div id="cartItems" class="cart-items-list"></div>
+
+                <div class="cart-summary-card">
+                    <h3>Order Summary</h3>
+                    
+                    <div class="summary-line">
+                        <span>Subtotal</span>
+                        <span id="cartTotal">$0.00</span>
+                    </div>
+                    
+                    <div class="summary-line">
+                        <span>Estimated Shipping</span>
+                        <span>TBD</span>
+                    </div>
+
+                    <div class="summary-line">
+                        <span>Estimated Tax</span>
+                        <span>—</span>
+                    </div>
+
+                    <div class="summary-line total-bold">
+                        <span>Total</span>
+                        <span id="cartFinalTotal">$0.00</span>
+                    </div>
+
+                    <p class="summary-note">Taxes and shipping are calculated at checkout based on your delivery address.</p>
+
+                    <button class="checkout-full-btn" onclick="goToCheckout()">
+                        <span>Proceed to Checkout</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <a href="index.html" class="continue-shopping">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>About Ellen Luxe</h4>
+                <p>Premium hair care products for the modern individual.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Ellen Luxe Hairs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const CART_KEY = "ellenLuxeCart";
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+            const container = document.getElementById("cartItems");
+            const subtotalEl = document.getElementById("cartTotal");
+            const totalEl = document.getElementById("cartFinalTotal");
+            const badge = document.getElementById("cartCount");
+
+            if (!container) return;
+            container.innerHTML = "";
+            let total = 0;
+            let count = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="empty-msg-container">
+                    <p class="empty-msg">Your bag is currently empty.</p>
+                    <a href="index.html" class="shop-link">Discover Our Collection</a>
+                </div>`;
+                subtotalEl.innerText = "$0.00";
+                totalEl.innerText = "$0.00";
+                if(badge) badge.innerText = "0";
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+                count += item.qty;
+
+                const row = document.createElement("div");
+                row.className = "cart-item-row";
+                row.innerHTML = `
+                    <div class="item-info">
+                        <span class="item-name">${item.name}</span>
+                        <span class="item-meta">${item.length}" Length</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="qty-selector">
+                            <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+                            <span class="qty-val">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                        </div>
+                        <span class="item-price">$${itemTotal.toFixed(2)}</span>
+                        <button class="remove-btn" onclick="removeItem(${index})" title="Remove item">&times;</button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            subtotalEl.innerText = `$${total.toFixed(2)}`;
+            totalEl.innerText = `$${total.toFixed(2)}`;
+            if(badge) badge.innerText = count;
+        }
+
+        function changeQty(index, delta) {
+            let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+            if (cart[index]) {
+                cart[index].qty += delta;
+                if (cart[index].qty <= 0) {
+                    cart.splice(index, 1);
+                }
+                localStorage.setItem(CART_KEY, JSON.stringify(cart));
+                renderCart();
+            }
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+            cart.splice(index, 1);
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            renderCart();
+        }
+
+        function goToCheckout() {
+            const cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+            if(cart.length === 0) {
+                alert("Please add items to your bag before checking out.");
+                return;
+            }
+            window.location.href = "checkout.html";
+        }
+
+        window.onload = renderCart;
+    </script>
+</body>
+</html>

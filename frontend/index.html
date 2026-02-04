@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ellen Luxe Hairs - Luxury Hair Care & Styling</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="index.html">
+                    <img src="../images/ellen-luxe-logo.png" alt="Ellen Luxe Logo">
+                </a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search products, styles, colors..." id="searchInput">
+                <button class="search-button" id="searchButton">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="hair-type.html">Hair Type</a></li>
+                    <li><a href="sale.html" class="sale-link">Sale</a></li>
+                    <li><a href="policy.html">Policy</a></li>
+                    <li><a href="new.html">New</a></li>
+                </ul>
+            </nav>
+                <!--Cart Button-->
+            <div class="header-controls">
+                <a href="cart.html" class="cart-anchor">
+                    <div class="cart-icon-wrapper">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        <span class="cart-counter" id="cartCount">0</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+ 
+
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Carousel Section -->
+    <section class="hero-carousel">
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+
+                <!--Video Slide-->
+                 <div class="carousel-slide video" data-type="image">
+                    <video src="C:\Users\nanak\OneDrive\Desktop\NII PROJECT\grok-video-a1d9dfc9-d10a-4385-8e1b-b68bef031f58 (1).mp4" alt="Luxury Hair Salon">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Discover Your Perfect Look</h2>
+                        <p class="slide-text">Premium hair care products for every style</p>
+                        <a href="#products" class="slide-cta">Shop Now</a>
+                    </div>
+                </div>
+                <!-- Slide 1 - Image -->
+                <div class="carousel-slide active" data-type="image">
+                    <img src="C:\Users\nanak\OneDrive\Desktop\NII PROJECT\images\Image_fx (17).png" alt="Luxury Hair Salon">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Discover Your Perfect Look</h2>
+                        <p class="slide-text">Premium hair care products for every style</p>
+                        <a href="#products" class="slide-cta">Shop Now</a>
+                    </div>
+                </div>
+
+                <!-- Slide 2 - Image -->
+                <div class="carousel-slide" data-type="image">
+                    <img src="C:\Users\nanak\OneDrive\Desktop\NII PROJECT\images\Image_fx (19).png" alt="Hair Styling">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Professional Styling Tools</h2>
+                        <p class="slide-text">Salon-quality results at home</p>
+                        <a href="tools.html" class="slide-cta">Explore Tools</a>
+                    </div>
+                </div>
+
+                <!-- Slide 3 - Video (placeholder for video element) -->
+                <div class="carousel-slide" data-type="video">
+                    <video class="carousel-video" loop muted playsinline>
+                        <source src="grok-video-.mp4" type="video/mp4">
+                        <!-- Fallback image if video doesn't load -->
+                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=1600&h=800&fit=crop" alt="Hair Care">
+                    </video>
+                    <div class="slide-content">
+                        <h2 class="slide-title">Transform Your Hair</h2>
+                        <p class="slide-text">Expert care for beautiful, healthy hair</p>
+                        <a href="hair-type.html" class="slide-cta">Find Your Type</a>
+                    </div>
+                </div>
+
+                <!-- Slide 4 - Image -->
+                <div class="carousel-slide" data-type="image">
+                    <img src="C:\Users\nanak\OneDrive\Desktop\NII PROJECT\images\Image_fx (21).png" alt="Hair Products">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Exclusive Collections</h2>
+                        <p class="slide-text">New arrivals for the season</p>
+                        <a href="#products" class="slide-cta">View Collection</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <button class="carousel-control prev" id="prevSlide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="carousel-control next" id="nextSlide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators" id="carouselIndicators"></div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="products-section" id="products">
+        <div class="section-header">
+            <h2 class="section-title">Featured Ponytails</h2>
+            <p class="section-subtitle">Elevated styles crafted for effortless beauty</p>
+        </div>
+        <!--Seacrh Results Produced Empty-->
+        <p id="noResults" style="display:none; text-align:center; margin-top:20px;">
+    No products found. Try searching for shampoo, oil, serum, mask, spray…
+</p>
+
+      <div class="products-grid">
+    <div class="product-card">
+        <div class="product-image">
+            <img src="../images/kinky-straight.png" alt="Kinky Straight Ponytail">
+            <div class="product-badge">100% Human Hair</div>
+        </div>
+        <div class="product-info">
+            <h3 class="product-name">Kinky Straight Ponytail</h3>
+            <p class="product-description">Soft, natural blow-out finish. Blends effortlessly with textured hair.</p>
+            
+            <div class="product-selection">
+                <label for="length-1">Select Length:</label>
+                <select id="length-1" class="length-selector" onchange="updateButton(this)">
+                    <option value="10">10 inches (Pre-order)</option>
+                    <option value="12">12 inches (Pre-order)</option>
+                    <option value="14">14 inches (Pre-order)</option>
+                    <option value="16">16 inches (Pre-order)</option>
+                    <option value="18" selected>18 inches (In Stock)</option>
+                    <option value="20">20 inches (Pre-order)</option>
+                    <option value="22">22 inches (Pre-order)</option>
+                    <option value="24">24 inches (Pre-order)</option>
+                    <option value="26">26 inches (Pre-order)</option>
+                    <option value="28">28 inches (Pre-order)</option>
+                    <option value="30">30 inches (Pre-order)</option>
+                </select>
+            </div>
+
+            <div class="product-footer">
+                <span class="product-price">$85.00</span>
+                <button class="buy-button">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="../images/kinky-curly.png" alt="Kinky Curly Ponytail">
+            <div class="product-badge">Bestseller</div>
+        </div>
+        <div class="product-info">
+            <h3 class="product-name">Kinky Curly Ponytail</h3>
+            <p class="product-description">Defined, springy curls with 200 density for maximum volume.</p>
+            
+            <div class="product-selection">
+                <label for="length-2">Select Length:</label>
+                <select id="length-2" class="length-selector" onchange="updateButton(this)">
+                    <option value="10">10 inches (Pre-order)</option>
+                    <option value="12">12 inches (Pre-order)</option>
+                    <option value="14">14 inches (Pre-order)</option>
+                    <option value="16">16 inches (Pre-order)</option>
+                    <option value="18" selected>18 inches (In Stock)</option>
+                    <option value="20">20 inches (Pre-order)</option>
+                    <option value="22">22 inches (Pre-order)</option>
+                    <option value="24">24 inches (Pre-order)</option>
+                    <option value="26">26 inches (Pre-order)</option>
+                    <option value="28">28 inches (Pre-order)</option>
+                    <option value="30">30 inches (Pre-order)</option>
+                </select>
+            </div>
+
+            <div class="product-footer">
+                <span class="product-price">$90.00</span>
+                <button class="buy-button">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <div class="product-image">
+            <img src="../images/body-wave.png" alt="Body Wave Ponytail">
+        </div>
+        <div class="product-info">
+            <h3 class="product-name">Body Wave Ponytail</h3>
+            <p class="product-description">Smooth, elegant waves for a timeless and effortless look.</p>
+            
+            <div class="product-selection">
+                <label for="length-3">Select Length:</label>
+                <select id="length-3" class="length-selector" onchange="updateButton(this)">
+                    <option value="10">10 inches (Pre-order)</option>
+                    <option value="12">12 inches (Pre-order)</option>
+                    <option value="14">14 inches (Pre-order)</option>
+                    <option value="16">16 inches (Pre-order)</option>
+                    <option value="18" selected>18 inches (In Stock)</option>
+                    <option value="20">20 inches (Pre-order)</option>
+                    <option value="22">22 inches (Pre-order)</option>
+                    <option value="24">24 inches (Pre-order)</option>
+                    <option value="26">26 inches (Pre-order)</option>
+                    <option value="28">28 inches (Pre-order)</option>
+                    <option value="30">30 inches (Pre-order)</option>
+                </select>
+            </div>
+
+            <div class="product-footer">
+                <span class="product-price">$80.00</span>
+                <button class="buy-button">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>About Ellen Luxe</h4>
+                <p>Premium hair care products and styling solutions for the modern individual.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="shipping.html">Shipping Info</a></li>
+                    <li><a href="returns.html">Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Newsletter</h4>
+                <p>Subscribe for exclusive offers and hair care tips</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Ellen Luxe Hairs. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

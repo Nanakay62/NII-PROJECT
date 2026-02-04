@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Ellen Luxe Hairs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <script src="https://www.paypal.com/sdk/js?client-id=Ad3cZx1yWpY6mWJzCUOfb1pMDsjbwvS5KoPR1I-gA5LvQ6aBEZJzI3WdlO_RXBpAuPkID4oy559xjl2P&currency=USD"></script>
+</head>
+<body class="checkout-body">
+
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="C:\Users\nanak\OneDrive\Desktop\NII PROJECT\ELLEN LUXE LOGO.png" alt="Ellen Luxe Logo">
+                </a>
+            </div>
+            <div class="checkout-step-indicator">
+                <span>Bag</span> &rarr; <span class="active-step">Information</span> &rarr; <span>Payment</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="checkout-main">
+        <div class="checkout-container">
+            <section class="checkout-form-section">
+                <form id="shipping-form">
+                    <div class="form-group">
+                        <h3>Contact Information</h3>
+                        <input type="email" placeholder="Email address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <h3>Shipping Address</h3>
+                        <div class="input-row">
+                            <input type="text" placeholder="First name" required>
+                            <input type="text" placeholder="Last name" required>
+                        </div>
+                        <input type="text" placeholder="Address" required>
+                        <input type="text" placeholder="Apartment, suite, etc. (optional)">
+                        <div class="input-row">
+                            <input type="text" placeholder="City" required>
+                            <input type="text" placeholder="Postal code" required>
+                        </div>
+                    </div>
+
+                    <div class="payment-trigger-section">
+                        <h3>Payment</h3>
+                        <p>All transactions are secure and encrypted.</p>
+                        <div id="paypal-button-container"></div>
+                        <a href="cart.html" class="back-to-cart-link">← Return to Shopping Cart</a>
+                    </div>
+                </form>
+            </section>
+
+            <aside class="checkout-summary-section">
+                <div class="checkout-summary-box">
+                    <h3>Your Order</h3>
+                    <div id="checkout-items-list"></div>
+                    
+                    <div class="summary-totals">
+                        <div class="line"><span>Subtotal</span> <span id="subtotal-val">$0.00</span></div>
+                        <div class="line"><span>Shipping</span> <span class="free-text">FREE</span></div>
+                        <div class="line total"><span>Total</span> <span id="total-val">$0.00</span></div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        const CART_KEY = "ellenLuxeCart";
+        let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+
+        function initCheckout() {
+            const list = document.getElementById('checkout-items-list');
+            const subtotalEl = document.getElementById('subtotal-val');
+            const totalEl = document.getElementById('total-val');
+            
+            let total = 0;
+            list.innerHTML = "";
+
+            if (cart.length === 0) {
+                list.innerHTML = "<p>Your cart is empty.</p>";
+                return;
+            }
+
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                list.innerHTML += `
+                    <div class="checkout-item">
+                        <div class="item-details">
+                            <p><strong>${item.name}</strong> x ${item.qty}</p>
+                            <span>${item.length}"</span>
+                        </div>
+                        <p>$${(item.price * item.qty).toFixed(2)}</p>
+                    </div>
+                `;
+            });
+
+            subtotalEl.innerText = `$${total.toFixed(2)}`;
+            totalEl.innerText = `$${total.toFixed(2)}`;
+
+            // PayPal Integration
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: { value: total.toFixed(2) }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        alert('Transaction completed by ' + details.payer.name.given_name);
+                        localStorage.removeItem(CART_KEY);
+                        window.location.href = "success.html";
+                    });
+                },
+                onError: function(err) {
+                    console.error('PayPal Error:', err);
+                    alert('There was an error processing your payment.');
+                }
+            }).render('#paypal-button-container');
+        } // Function closure fixed here
+
+        window.onload = initCheckout;
+    </script>
+</body>
+</html>
